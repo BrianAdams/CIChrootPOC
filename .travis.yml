@@ -1,0 +1,7 @@
+language: erlang
+
+env:
+  - ARCH=armhf
+
+script:
+  - "bash -ex .travis-ci.sh"
