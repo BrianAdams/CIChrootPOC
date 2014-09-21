@@ -3,7 +3,7 @@
 # Based on a test script from avsm/ocaml repo https://github.com/avsm/ocaml
 
 CHROOT_DIR=/tmp/arm-chroot
-MIRROR=repos.rcn-ee.net/debian
+MIRROR=http://repos.rcn-ee.net/debian
 VERSION=wheezy
 CHROOT_ARCH=armhf
 
