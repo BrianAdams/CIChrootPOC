@@ -21,7 +21,7 @@ function setup_arm_chroot {
     sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
 
     # Create chrooted environment
-    wget ${MIRROR} | tar xvz
+    wget  -qO- ${MIRROR} | tar xvz
     ./lib/mount.sh debian-7.5-OpenROV-armhf-2014-09-06.img
 
     # Create file with environment variables which will be used inside chrooted
@@ -65,5 +65,5 @@ echo "Environment: $(uname -a)"
 ${TEST_COMMAND}
 
 if [ -e "/.chroot_is_done" ]; then
-  ./lib/unmount.sh 
+  ./lib/unmount.sh
 fi
