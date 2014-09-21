@@ -21,7 +21,8 @@ function setup_arm_chroot {
     sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
 
     # Create chrooted environment
-    wget  -qO- ${MIRROR} | tar xvz
+    wget  ${MIRROR}
+    tar xvz debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
     ./lib/mount.sh debian-7.5-OpenROV-armhf-2014-09-06.img
 
     # Create file with environment variables which will be used inside chrooted
