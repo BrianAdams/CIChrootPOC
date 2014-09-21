@@ -2,8 +2,8 @@
 # from: http://www.tomaz.me/2013/12/02/running-travis-ci-tests-on-arm.html
 # Based on a test script from avsm/ocaml repo https://github.com/avsm/ocaml
 
-CHROOT_DIR=/tmp/arm-chroot
-MIRROR=http://archive.raspbian.org/raspbian
+CHROOT_DIR=/root
+MIRROR=http://build.openrov.com:8080/view/Debian/job/OpenROV-DEBIAN-000-root-filesystem/lastSuccessfulBuild/artifact/deploy/debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
 VERSION=wheezy
 CHROOT_ARCH=armhf
 
@@ -11,23 +11,18 @@ CHROOT_ARCH=armhf
 HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
 
 # Debian package dependencies for the chrooted environment
-GUEST_DEPENDENCIES="build-essential git m4 sudo python"
+GUEST_DEPENDENCIES=""
 
 # Command used to run the tests
-TEST_COMMAND="make test"
+TEST_COMMAND="uname -a"
 
 function setup_arm_chroot {
     # Host dependencies
     sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
 
     # Create chrooted environment
-    sudo mkdir ${CHROOT_DIR}
-    sudo debootstrap --foreign --no-check-gpg --include=fakeroot,build-essential \
-        --arch=${CHROOT_ARCH} ${VERSION} ${CHROOT_DIR} ${MIRROR}
-    sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
-    sudo chroot ${CHROOT_DIR} ./debootstrap/debootstrap --second-stage
-    sudo sbuild-createchroot --arch=${CHROOT_ARCH} --foreign --setup-only \
-        ${VERSION} ${CHROOT_DIR} ${MIRROR}
+    wget ${MIRROR} | tar xvz
+    ./lib/mount.sh debian-7.5-OpenROV-armhf-2014-09-06.img
 
     # Create file with environment variables which will be used inside chrooted
     # environment
@@ -37,8 +32,8 @@ function setup_arm_chroot {
 
     # Install dependencies inside chroot
     sudo chroot ${CHROOT_DIR} apt-get update
-    sudo chroot ${CHROOT_DIR} apt-get --allow-unauthenticated install \
-        -qq -y ${GUEST_DEPENDENCIES}
+//    sudo chroot ${CHROOT_DIR} apt-get --allow-unauthenticated install \
+//        -qq -y ${GUEST_DEPENDENCIES}
 
     # Create build dir and copy travis build files to our chroot environment
     sudo mkdir -p ${CHROOT_DIR}/${TRAVIS_BUILD_DIR}
@@ -68,3 +63,7 @@ echo "Running tests"
 echo "Environment: $(uname -a)"
 
 ${TEST_COMMAND}
+
+if [ -e "/.chroot_is_done" ]; then
+  ./lib/unmount.sh 
+fi
