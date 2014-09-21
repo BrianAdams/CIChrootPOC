@@ -2,7 +2,7 @@ language: erlang
 
 env:
   - ARCH=x64
-  - ARCH=armhf
+  - ARCH=arm
 
 script:
   - "bash -ex .travis-ci.sh"
