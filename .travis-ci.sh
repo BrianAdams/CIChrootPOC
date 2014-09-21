@@ -3,12 +3,12 @@
 # Based on a test script from avsm/ocaml repo https://github.com/avsm/ocaml
 
 CHROOT_DIR=/tmp/arm-chroot
-MIRROR=http://repos.rcn-ee.net/debian
+MIRROR=http://archive.raspbian.org/raspbian
 VERSION=wheezy
 CHROOT_ARCH=armhf
 
 # Debian package dependencies for the host
-HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild tree"
+HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
 
 # Debian package dependencies for the chrooted environment
 GUEST_DEPENDENCIES="build-essential git m4 sudo python"
@@ -22,10 +22,8 @@ function setup_arm_chroot {
 
     # Create chrooted environment
     sudo mkdir ${CHROOT_DIR}
-    sudo debootstrap --foreign --no-check-gpg  \
+    sudo debootstrap --foreign --no-check-gpg --include=fakeroot,build-essential \
         --arch=${CHROOT_ARCH} ${VERSION} ${CHROOT_DIR} ${MIRROR}
-    sudo tree ${CHROOT_DIR}
-    sudo mkdir -p ${CHROOT_DIR}/usr/bin/
     sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
     sudo chroot ${CHROOT_DIR} ./debootstrap/debootstrap --second-stage
     sudo sbuild-createchroot --arch=${CHROOT_ARCH} --foreign --setup-only \
