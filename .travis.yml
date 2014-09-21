@@ -1,7 +1,7 @@
 language: erlang
 
-
 env:
+  - ARCH=x64
   - ARCH=armhf
 
 script:
