@@ -27,7 +27,7 @@ function setup_arm_chroot {
     sudo tree ${CHROOT_DIR}
     sudo mkdir -p ${CHROOT_DIR}/usr/bin/
     sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
-    sudo chroot ${CHROOT_DIR} /debootstrap/debootstrap --second-stage
+    sudo chroot ${CHROOT_DIR} debootstrap/debootstrap --second-stage
     sudo sbuild-createchroot --arch=${CHROOT_ARCH} --foreign --setup-only \
         ${VERSION} ${CHROOT_DIR} ${MIRROR}
 
