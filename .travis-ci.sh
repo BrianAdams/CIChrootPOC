@@ -22,7 +22,7 @@ function setup_arm_chroot {
 
     # Create chrooted environment
     wget  ${MIRROR}
-    tar xvz debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
+    tar xvf debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
     ./lib/mount.sh debian-7.5-OpenROV-armhf-2014-09-06.img
 
     # Create file with environment variables which will be used inside chrooted
