@@ -11,7 +11,7 @@ CHROOT_ARCH=armhf
 HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
 
 # Debian package dependencies for the chrooted environment
-GUEST_DEPENDENCIES=""
+GUEST_DEPENDENCIES="pv"
 
 # Command used to run the tests
 TEST_COMMAND="uname -a"
