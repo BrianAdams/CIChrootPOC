@@ -2,7 +2,7 @@
 # from: http://www.tomaz.me/2013/12/02/running-travis-ci-tests-on-arm.html
 # Based on a test script from avsm/ocaml repo https://github.com/avsm/ocaml
 
-CHROOT_DIR=/root
+CHROOT_DIR=/tmp/arm-chroot
 MIRROR=http://build.openrov.com:8080/view/Debian/job/OpenROV-DEBIAN-000-root-filesystem/lastSuccessfulBuild/artifact/deploy/debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
 VERSION=wheezy
 CHROOT_ARCH=armhf
@@ -21,10 +21,9 @@ function setup_arm_chroot {
     sudo apt-get install -qq -y ${HOST_DEPENDENCIES}
 
     # Create chrooted environment
-    modprobe loop
+    sudo mkdir -p ${CHROOT_DIR}
     wget  ${MIRROR}
-    tar xvf debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
-    ./lib/mount.sh debian-7.5-OpenROV-armhf-2014-09-06.img
+    tar xvf debian-7.5-OpenROV-armhf-2014-09-06.tar.xz -C ${CHROOT_DIR}
 
     # Create file with environment variables which will be used inside chrooted
     # environment
