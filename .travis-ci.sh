@@ -3,7 +3,7 @@
 # Based on a test script from avsm/ocaml repo https://github.com/avsm/ocaml
 
 CHROOT_DIR=/tmp/arm-chroot
-MIRROR=http://build.openrov.com:8080/view/Debian/job/OpenROV-DEBIAN-000-root-filesystem/lastSuccessfulBuild/artifact/deploy/debian-7.5-OpenROV-armhf-2014-09-06.tar.xz
+MIRROR=http://s3.armhf.com/dist/bone/debian-wheezy-7.5-rootfs-3.14.4.1-bone-armhf.com.tar.xz
 VERSION=wheezy
 CHROOT_ARCH=armhf
 
@@ -23,7 +23,7 @@ function setup_arm_chroot {
     # Create chrooted environment
     sudo mkdir -p ${CHROOT_DIR}
     wget  ${MIRROR}
-    sudo tar xvf debian-7.5-OpenROV-armhf-2014-09-06.tar.xz -C ${CHROOT_DIR}
+    sudo tar xvf debian-wheezy-7.5-rootfs-3.14.4.1-bone-armhf.com.tar.xz -C ${CHROOT_DIR}
 
     # Create file with environment variables which will be used inside chrooted
     # environment
