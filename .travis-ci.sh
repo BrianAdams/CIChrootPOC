@@ -31,6 +31,15 @@ function setup_arm_chroot {
     echo "export TRAVIS_BUILD_DIR=${TRAVIS_BUILD_DIR}" >> envvars.sh
     chmod a+x envvars.sh
 
+    #enable networking inside chroot
+    cat >> /etc/network/interfaces << __EOF__
+    auto eth0
+    iface eth0 inet dhcp
+    __EOF__
+
+    sudo chroot ${CHROOT_DIR} sudo ifconfig eth0 up
+    sudo chroot ${CHROOT_DIR} sudo dhclient eth0
+
     # Install dependencies inside chroot
     sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
     sudo chroot ${CHROOT_DIR} apt-get update
