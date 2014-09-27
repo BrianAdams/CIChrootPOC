@@ -31,9 +31,6 @@ function setup_arm_chroot {
     echo "export TRAVIS_BUILD_DIR=${TRAVIS_BUILD_DIR}" >> envvars.sh
     chmod a+x envvars.sh
 
-    #enable networking inside chroot
-    sudo chroot ${CHROOT_DIR} sudo echo "\nauto eth0\niface eth0 inet dhcp" >> /etc/network/interfaces
-
     sudo chroot ${CHROOT_DIR} sudo ifconfig eth0 up
     sudo chroot ${CHROOT_DIR} sudo dhclient eth0
 
