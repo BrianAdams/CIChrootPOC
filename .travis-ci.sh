@@ -32,7 +32,7 @@ function setup_arm_chroot {
     chmod a+x envvars.sh
 
     #enable networking inside chroot
-    sudo echo "\nauto eth0\niface eth0 inet dhcp" >> ${CHROOT_DIR}/etc/network/interfaces
+    sudo chroot ${CHROOT_DIR} sudo echo "\nauto eth0\niface eth0 inet dhcp" >> /etc/network/interfaces
 
     sudo chroot ${CHROOT_DIR} sudo ifconfig eth0 up
     sudo chroot ${CHROOT_DIR} sudo dhclient eth0
