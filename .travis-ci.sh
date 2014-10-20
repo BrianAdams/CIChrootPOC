@@ -34,7 +34,8 @@ function setup_arm_chroot {
     # Install dependencies inside chroot
     sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
     sudo apt-get -y install python-software-properties
-    sudo add-apt-repository -y ppa:webupd8team/java 
+    sudo add-apt-repository -y ppa:webupd8team/java
+    egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/*
     sudo chroot ${CHROOT_DIR} apt-get update
     sudo chroot ${CHROOT_DIR} apt-get --allow-unauthenticated install \
         -qq -y ${GUEST_DEPENDENCIES}
