@@ -1,5 +1,5 @@
-getent hosts security.debian.org
-getent hosts ftp.us.debian.org
+echo '-----------------------'
+cat /etc/apt/sources.list
 
 apt-get -y install python-software-properties
 add-apt-repository ppa:webupd8team/java
