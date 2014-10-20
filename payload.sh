@@ -1,9 +1,10 @@
 echo '-----------------------'
 cat /etc/apt/sources.list
-
-apt-get -y install python-software-properties
-add-apt-repository ppa:webupd8team/java
+echo 'deb ftp://carroll.aset.psu.edu/pub/linux/distributions/debian/ wheezy main contrib non-free' >>  /etc/apt/sources.list
 apt-get update -qq
+apt-get -y install python-software-properties
+#add-apt-repository ppa:webupd8team/java
+#apt-get update -qq
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
