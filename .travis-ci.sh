@@ -41,6 +41,10 @@ function setup_arm_chroot {
     sudo mkdir -p ${CHROOT_DIR}/${TRAVIS_BUILD_DIR}
     sudo rsync -av ${TRAVIS_BUILD_DIR}/ ${CHROOT_DIR}/${TRAVIS_BUILD_DIR}/
 
+    sudo mount -o bind /proc ${CHROOT_DIR}/proc
+
+    sudo cp /etc/resolv.conf ${CHROOT_DIR}/etc/resolv.conf
+
     # Indicate chroot environment has been set up
     sudo touch ${CHROOT_DIR}/.chroot_is_done
 
