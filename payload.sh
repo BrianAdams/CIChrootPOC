@@ -1,4 +1,4 @@
-/etc/init.d/nscd restart
+chmod 644 /etc/resolv.conf
 echo '--------- OLD -----------'
 cat /etc/apt/sources.list
 echo 'deb ftp://carroll.aset.psu.edu/pub/linux/distributions/debian/ wheezy main contrib non-free' >>  /etc/apt/sources.list
