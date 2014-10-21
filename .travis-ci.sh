@@ -45,8 +45,8 @@ function setup_arm_chroot {
     echo '======= host resolve ========='
     cat /etc/resolv.conf
     echo '======= chroot resolve ========='
-    cat ${CHROOT_DIR}/etc/resolv.conf  
-    sudo cp /etc/resolv.conf ${CHROOT_DIR}/etc/resolv.conf
+    cat ${CHROOT_DIR}/etc/resolv.conf
+    #sudo cp /etc/resolv.conf ${CHROOT_DIR}/etc/resolv.conf
 
     # Indicate chroot environment has been set up
     sudo touch ${CHROOT_DIR}/.chroot_is_done
