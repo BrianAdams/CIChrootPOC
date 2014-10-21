@@ -1,5 +1,7 @@
 language: erlang
 
+cache: false
+
 env:
   - ARCH=x64
   - ARCH=arm
