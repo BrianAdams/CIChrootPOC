@@ -61,6 +61,8 @@ else
   if [ "${ARCH}" = "arm" ]; then
     # ARM test run, need to set up chrooted environment first
     env
+    echo '-----------------------'
+    cat /etc/apt/sources.list
     echo "Setting up chrooted ARM environment"
     setup_arm_chroot
   fi
