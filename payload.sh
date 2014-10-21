@@ -1,6 +1,14 @@
-echo '-----------------------'
+echo '--------- OLD -----------'
 cat /etc/apt/sources.list
 echo 'deb ftp://carroll.aset.psu.edu/pub/linux/distributions/debian/ wheezy main contrib non-free' >>  /etc/apt/sources.list
+
+sed -i 's/ftp.us.debian.org/128.61.240.89/g' /etc/apt/sources.list
+sed -i 's/security.debian.org/128.101.240.212/g' /etc/apt/sources.list
+sed -i 's/carroll.aset.psu.edu/128.118.2.96/g' /etc/apt/sources.list
+
+echo '--------- NEW -----------'
+cat /etc/apt/sources.list
+
 apt-get update -qq
 apt-get -y install python-software-properties
 #add-apt-repository ppa:webupd8team/java
