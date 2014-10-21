@@ -37,8 +37,8 @@ export GYP_DEFINES="$GYP_DEFINES target_arch=arm arm_version=7"
 export C_INCLUDE_PATH=/usr/include:/usr/include/arm-linux-gnueabihf
 export CPLUS_INCLUDE_PATH=/usr/include:/usr/include/arm-linux-gnueabihf
 
-gclient config --name=trunk http://webrtc.googlecode.com/svn/branches/3.52
-gclient sync --force
+gclient config --name=trunk http://webrtc.googlecode.com/svn/branches/3.52 2>&1 >/dev/null
+gclient sync --force 2>&1 >/dev/null
 
 cd trunk/talk; mkdir ipop-project; cd ipop-project
 git clone --depth 1 https://github.com/ipop-project/ipop-tap.git
@@ -52,7 +52,7 @@ cp talk/ipop-project/ipop-tincan/build/libjingle.gyp talk/
 cp talk/ipop-project/ipop-tincan/build/all.gyp .
 cp talk/ipop-project/ipop-tincan/build/DEPS .
 
-gclient sync --force
+gclient sync --force 2>&1 >/dev/null
 
 sed -i "s/'arm_float_abi%': 'soft',/'arm_float_abi%': 'hard',/g" build/common.gypi
 sed -i "s/'arm_fpu%': '',/'arm_fpu%': 'vfp',/g" build/common.gypi
@@ -60,6 +60,6 @@ sed -i "s/'arm_fpu%': '',/'arm_fpu%': 'vfp',/g" build/common.gypi
 mv third_party/gold/gold32 third_party/gold/gold32.bak
 ln -s /usr/bin/gold third_party/gold/gold32
 
-gclient runhooks --force
+gclient runhooks --force 2>&1 >/dev/null
 
 make ipop-tincan BUILDTYPE=Release

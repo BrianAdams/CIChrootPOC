@@ -42,11 +42,6 @@ function setup_arm_chroot {
     sudo rsync -av ${TRAVIS_BUILD_DIR}/ ${CHROOT_DIR}/${TRAVIS_BUILD_DIR}/
 
     sudo mount -o bind /proc ${CHROOT_DIR}/proc
-    echo '======= host resolve ========='
-    cat /etc/resolv.conf
-    echo '======= chroot resolve ========='
-    cat ${CHROOT_DIR}/etc/resolv.conf
-    #sudo cp /etc/resolv.conf ${CHROOT_DIR}/etc/resolv.conf
 
     # Indicate chroot environment has been set up
     sudo touch ${CHROOT_DIR}/.chroot_is_done
@@ -67,9 +62,8 @@ if [ -e "/.chroot_is_done" ]; then
 else
   if [ "${ARCH}" = "arm" ]; then
     # ARM test run, need to set up chrooted environment first
-    env
+#    env
     echo '-----------------------'
-    cat /etc/apt/sources.list
     echo "Setting up chrooted ARM environment"
     setup_arm_chroot
   fi
