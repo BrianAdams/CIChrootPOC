@@ -33,7 +33,7 @@ function setup_arm_chroot {
 
     # Install dependencies inside chroot
     sudo cp /usr/bin/qemu-arm-static ${CHROOT_DIR}/usr/bin/
-    sudo chroot ${CHROOT_DIR} apt-get update
+  #  sudo chroot ${CHROOT_DIR} apt-get update
   #  sudo chroot ${CHROOT_DIR} apt-get --allow-unauthenticated install \
   #      -qq -y ${GUEST_DEPENDENCIES}
 
@@ -42,7 +42,10 @@ function setup_arm_chroot {
     sudo rsync -av ${TRAVIS_BUILD_DIR}/ ${CHROOT_DIR}/${TRAVIS_BUILD_DIR}/
 
     sudo mount -o bind /proc ${CHROOT_DIR}/proc
-
+    echo '======= host resolve ========='
+    cat /etc/resolv.conf
+    echo '======= chroot resolve ========='
+    cat ${CHROOT_DIR}/etc/resolv.conf  
     sudo cp /etc/resolv.conf ${CHROOT_DIR}/etc/resolv.conf
 
     # Indicate chroot environment has been set up
